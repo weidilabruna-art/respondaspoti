@@ -186,7 +186,7 @@
                     .join('&');
 
                 // Monta URL Destino com redundância de parâmetros
-                let urlDestino = `./02/?nome=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}`;
+               let urlDestino = `./spoti/02/?nome=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}`;
                 if (utmParams) urlDestino += '&' + utmParams;
 
                 window.location.href = urlDestino;
