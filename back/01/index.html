@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oferta Exclusiva</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(6px);
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .banner {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 22px;
+      color: #1DB954;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 25px;
+    }
+    .price-box {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #d10000;
+    }
+    .price-box strong {
+      color: #000;
+    }
+    button {
+      width: 100%;
+      background-color: #1DB954;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background-color: #17a74a;
+      transform: translateY(-1px);
+    }
+    .footer-text {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="images/bannergerador.png" alt="Oferta Especial" class="banner">
+    <h2>✨ VOCÊ FOI ESCOLHIDO(A) ✨</h2>
+    <p>
+      A cada 50 pessoas, <strong>apenas 1 é selecionada</strong> para desbloquear uma <strong>oferta secreta</strong> com acesso completo por um valor simbólico.
+    </p>
+    <div class="price-box">
+      De <del>R$ 9,99</del> por apenas <strong>R$ 7,99</strong>.<br>
+      <small>Mas só se você aceitar AGORA.</small>
+    </div>
+<button onclick="aproveitarOferta()">QUERO APROVEITAR AGORA</button>
+
+<script>
+  function aproveitarOferta() {
+    const utms = window.location.search;
+    window.location.href = 'https://pay.conexaoprivada.shop/69b46264b65583296e4d2627' + utms;
+  }
+</script>
+
+    <div class="footer-text">Oferta limitada, não garantimos nova tentativa.</div>
+  </div>
+
+</body></html>
